@@ -1,0 +1,19 @@
+# Importing the required libraries
+import nltk
+from nltk import CFG
+# Defining the grammar rules
+grammar = CFG.fromstring("""
+S -> NP VP
+NP -> Det N | Det N PP
+VP -> V NP | V NP PP
+PP -> P NP
+Det -> 'The' | 'a' | 'the'
+N -> 'dog' | 'cat' | 'house' | 'car'
+V -> 'chased' | 'ate' | 'drove'
+P -> 'in' | 'on' | 'at'
+""")
+# Creating the parser
+parser = nltk.ChartParser(grammar)
+# Parsing a sentence
+sentence = "The dog chased the cat"
+for tree in parser.parse(sentence.split()):print(tree)

@@ -1,0 +1,43 @@
+install skfuzzzy :- pip install scikit-fuzzy
+
+import numpy as np
+import skfuzzy as fuzz
+import matplotlib.pyplot as plt
+from skfuzzy import control as ctrl
+from mpl_toolkits.mplot3d import Axes3D # Required for 3D plotting
+# New Antecedent/Consequent objects hold universe variables and membership
+# functions
+quality = ctrl.Antecedent(np.arange(0, 10, 0.1), 'quality')
+service = ctrl.Antecedent(np.arange(0, 10, 0.1), 'service')
+tip = ctrl.Consequent(np.arange(0, 25, 0.1), 'tip')
+quality['poor'] = fuzz.zmf(quality.universe, 0,5)
+quality['average'] = fuzz.gaussmf(quality.universe,5,1)
+quality['good'] = fuzz.smf(quality.universe,5,10)
+service['poor'] = fuzz.zmf(service.universe, 0,5)
+service['average'] = fuzz.gaussmf(service.universe,5,1)
+service['good'] = fuzz.smf(service.universe,5,10)
+tip['low'] = fuzz.trimf(tip.universe, [0, 0, 13])
+tip['medium'] = fuzz.trimf(tip.universe, [0, 13, 25])
+tip['high'] = fuzz.trimf(tip.universe, [13, 25, 25])
+quality['average'].view()
+plt.title('Quality')
+service['poor'].view()
+plt.title('Service')
+tip['medium'].view()
+plt.title('Tip Medium')
+rule1 = ctrl.Rule(quality['poor'] | service['poor'], tip['low'])
+rule2 = ctrl.Rule(service['average'], tip['medium'])
+rule3 = ctrl.Rule(service['good'] | quality['good'], tip['high'])
+rule1.view()
+plt.title('Rule 1')
+rule2.view()
+plt.title('Rule 2')
+rule3.view()
+plt.title('Rule 3')
+tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
+tipping = ctrl.ControlSystemSimulation(tipping_ctrl)
+tipping.input['quality'] = 6.5
+tipping.input['service'] = 9.8
+tipping.compute()
+print(tipping.output['tip'])
+tip.view(sim=tipping)

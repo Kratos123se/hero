@@ -1,0 +1,24 @@
+For running bayes theoremm, use prolog:
+search for prolog compilor and choose swish ("https://swish.swi-prolog.org/").
+
+
+father(joe,paul).
+father(joe,mary).
+father(joe,hope).
+mother(jane,paul).
+mother(jane,mary).
+mother(jane,hope).
+male(paul).
+male(joe).
+male(raphl).
+male(X):-father(X,Y).
+female(mary).
+female(jane).
+female(hope).
+female(X):-mother(X,Y).
+son_of(X,Y):- father(Y,X),male(X).
+son_of(X,Y):- mother(Y,X),male(X).
+daughter_of(X,Y):- father(Y,X),female(X).
+daughter_of(X,Y):- mother(Y,X),female(X).
+sibling_of(X,Y):- father(Z,X),father(Z,Y),X\=Y.
+sibling_of(X,Y):- mother(Z,X),mother(Z,Y),X\=Y.

@@ -1,0 +1,25 @@
+# Importing necessary libraries
+import numpy as np
+
+# Function to calculate conditional probability P(A|B)
+def conditional_probability(prob_a, prob_b_given_a, prob_b):
+    return (prob_a * prob_b_given_a) / prob_b
+
+# Function to calculate joint probability P(A and B)
+def joint_probability(prob_a, prob_b_given_a):
+    return prob_a * prob_b_given_a
+
+# Example usage
+if __name__ == "__main__":
+    # Define probabilities
+    prob_a = 0.4
+    prob_b_given_a = 0.7
+    prob_b = 0.6
+    
+    # Calculate conditional probability P(A|B)
+    conditional_prob = conditional_probability(prob_a, prob_b_given_a, prob_b)
+    print("Conditional Probability P(A|B):", conditional_prob)
+    
+    # Calculate joint probability P(A and B)
+    joint_prob = joint_probability(prob_a, prob_b_given_a)
+    print("Joint Probability P(A and B):", joint_prob)

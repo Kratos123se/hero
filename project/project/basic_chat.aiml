@@ -1,0 +1,34 @@
+<aiml>
+    <category>
+        <pattern>JAI SHREE RAM</pattern>
+        <template>Jai shree ram, How can i help sir</template>
+    </category>
+    <category>
+        <pattern>WHO ARE YOU</pattern>
+        <template>I am a bot, What about you</template>
+    </category>
+    <category>
+        <pattern>MY NAME IS *</pattern>
+        <template>
+            <set name="username">
+            <star/>
+            </set> is the nice name
+        </template>
+    </category>
+    <category>
+        <pattern>I LIKE *</pattern>
+        <template>
+            <set name="liking">
+            <star/>
+            </set> is my fav
+        </template>
+    </category>
+    <category>
+        <pattern>I ALSO PLAY *</pattern>
+        <template>
+            <set name="playing">
+            <star/>
+            </set> is interesting game
+        </template>
+    </category>
+</aiml>

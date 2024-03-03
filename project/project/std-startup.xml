@@ -1,0 +1,8 @@
+<aiml>
+    <category>
+        <pattern>LOAD A</pattern>
+        <template>
+            <learn>basic_chat.aiml</learn>
+        </template>
+    </category>
+</aiml>
